@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Scoropan_Delia_lab2.Data;
 
@@ -11,9 +12,10 @@ using Scoropan_Delia_lab2.Data;
 namespace Scoropan_Delia_lab2.Migrations
 {
     [DbContext(typeof(Scoropan_Delia_lab2Context))]
-    partial class Scoropan_Delia_lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221025101633_Author")]
+    partial class Author
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace Scoropan_Delia_lab2.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("PublisherID")
                         .HasColumnType("int");
@@ -96,7 +98,7 @@ namespace Scoropan_Delia_lab2.Migrations
             modelBuilder.Entity("Scoropan_Delia_lab2.Models.Book", b =>
                 {
                     b.HasOne("Scoropan_Delia_lab2.Models.Author", "Author")
-                        .WithMany("Books")
+                        .WithMany()
                         .HasForeignKey("AuthorID");
 
                     b.HasOne("Scoropan_Delia_lab2.Models.Publisher", "Publisher")
@@ -106,11 +108,6 @@ namespace Scoropan_Delia_lab2.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("Scoropan_Delia_lab2.Models.Author", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Scoropan_Delia_lab2.Models.Publisher", b =>
