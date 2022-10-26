@@ -19,5 +19,7 @@ namespace Scoropan_Delia_lab2.Data
         public DbSet<Scoropan_Delia_lab2.Models.Publisher> Publisher { get; set; }
 
         public DbSet<Scoropan_Delia_lab2.Models.Author> Author { get; set; }
+
+        public DbSet<Scoropan_Delia_lab2.Models.Category> Category { get; set; }
     }
 }
