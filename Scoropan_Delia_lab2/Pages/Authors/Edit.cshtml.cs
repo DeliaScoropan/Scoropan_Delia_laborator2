@@ -30,7 +30,7 @@ namespace Scoropan_Delia_lab2.Pages.Authors
                 return NotFound();
             }
 
-            var author =  await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
             if (author == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace Scoropan_Delia_lab2.Pages.Authors
 
         private bool AuthorExists(int id)
         {
-          return _context.Author.Any(e => e.ID == id);
+            return _context.Author.Any(e => e.ID == id);
         }
     }
 }

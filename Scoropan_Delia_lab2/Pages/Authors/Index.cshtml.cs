@@ -19,7 +19,7 @@ namespace Scoropan_Delia_lab2.Pages.Authors
             _context = context;
         }
 
-        public IList<Author> Author { get;set; } = default!;
+        public IList<Author> Author { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

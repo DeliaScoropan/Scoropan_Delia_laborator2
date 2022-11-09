@@ -71,7 +71,7 @@ namespace Scoropan_Delia_lab2.Pages.Categories
 
         private bool CategoryExists(int id)
         {
-          return _context.Category.Any(e => e.ID == id);
+            return _context.Category.Any(e => e.ID == id);
         }
     }
 }

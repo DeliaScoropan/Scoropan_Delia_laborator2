@@ -12,8 +12,8 @@ using Scoropan_Delia_lab2.Data;
 namespace Scoropan_Delia_lab2.Migrations
 {
     [DbContext(typeof(Scoropan_Delia_lab2Context))]
-    [Migration("20221026112952_BookCategory")]
-    partial class BookCategory
+    [Migration("20221108144213_Categorie")]
+    partial class Categorie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,6 @@ namespace Scoropan_Delia_lab2.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
