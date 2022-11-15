@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Scoropan_Delia_lab2.Migrations
 {
-    public partial class Categorie : Migration
+    public partial class totul : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,23 @@ namespace Scoropan_Delia_lab2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Member",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Member", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Publisher",
                 columns: table => new
                 {
@@ -55,8 +72,8 @@ namespace Scoropan_Delia_lab2.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PublishingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PublisherID = table.Column<int>(type: "int", nullable: true),
                     AuthorID = table.Column<int>(type: "int", nullable: true)
@@ -102,6 +119,31 @@ namespace Scoropan_Delia_lab2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Borrowing",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberID = table.Column<int>(type: "int", nullable: true),
+                    BookID = table.Column<int>(type: "int", nullable: true),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Borrowing", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Borrowing_Book_BookID",
+                        column: x => x.BookID,
+                        principalTable: "Book",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Borrowing_Member_MemberID",
+                        column: x => x.MemberID,
+                        principalTable: "Member",
+                        principalColumn: "ID");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Book_AuthorID",
                 table: "Book",
@@ -121,6 +163,16 @@ namespace Scoropan_Delia_lab2.Migrations
                 name: "IX_BookCategory_CategoryID",
                 table: "BookCategory",
                 column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Borrowing_BookID",
+                table: "Borrowing",
+                column: "BookID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Borrowing_MemberID",
+                table: "Borrowing",
+                column: "MemberID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -129,10 +181,16 @@ namespace Scoropan_Delia_lab2.Migrations
                 name: "BookCategory");
 
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "Borrowing");
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Book");
+
+            migrationBuilder.DropTable(
+                name: "Member");
 
             migrationBuilder.DropTable(
                 name: "Author");

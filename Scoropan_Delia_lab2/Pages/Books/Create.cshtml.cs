@@ -43,7 +43,8 @@ namespace Scoropan_Delia_lab2.Pages.Books
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
-            var newBook = new Book();
+            // var newBook = new Book();
+            var newBook = Book;
 
             if (selectedCategories != null)
             {
@@ -68,9 +69,9 @@ namespace Scoropan_Delia_lab2.Pages.Books
                  return RedirectToPage("./Index");
              } */
 
-            /* _context.Book.Add(newBook);
+             _context.Book.Add(newBook);
              await _context.SaveChangesAsync();
-             return RedirectToPage("./Index");*/
+             return RedirectToPage("./Index");
 
             PopulateAssignedCategoryData(_context, newBook);
             return Page();
